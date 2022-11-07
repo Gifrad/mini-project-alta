@@ -34,6 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final dataCustomer = Provider.of<CustomerViewModel>(context).dataCustomer;
     final dataCustomerLenght = dataCustomer.length;
+    final sumPrice = dataCustomer.fold(
+        0,
+        ((sum, element) =>
+            sum + num.parse(element.totalPrice.toString()).toInt()));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(180),
@@ -98,9 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ProfileStoreScreen(),
+                              TransitionScreen(
+                                beginLeft: 0.0,
+                                beginRight: -1.0,
+                                curvesAction: Curves.easeIn,
+                                screen: const ProfileStoreScreen(),
                               ),
                             );
                           },
@@ -150,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Column(children: [
                             Text(
-                              'Jumlah',
+                              'Jumlah Hutang',
                               style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.bold),
                             ),
@@ -160,9 +166,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 100,
                                 height: 40,
                                 color: colorCustom.bluePrimary,
-                                child: const Center(
-                                  child: Text('-'),
-                                ),
+                                child: Center(
+                                    child: sumPrice != 0
+                                        ? Text('Rp :$sumPrice')
+                                        : const Text('0')),
                               ),
                             ),
                           ])
@@ -185,8 +192,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
+                    TransitionScreen(
+                      beginLeft: 1.0,
+                      beginRight: 0.0,
+                      curvesAction: Curves.easeIn,
+                      screen:
                           DetailCustomer(data: value.dataCustomer[index].id!),
                     ),
                   );
@@ -250,13 +260,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 onTap: () {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          EditEntryScreen(
-                                                              data: value
-                                                                  .dataCustomer[
-                                                                      index]
-                                                                  .id!),
+                                                    TransitionScreen(
+                                                      beginLeft: 0.0,
+                                                      beginRight: 1.0,
+                                                      curvesAction:
+                                                          Curves.easeIn,
+                                                      screen: EditEntryScreen(
+                                                          data: value
+                                                              .dataCustomer[
+                                                                  index]
+                                                              .id!),
                                                     ),
                                                   );
                                                 },
@@ -268,13 +281,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 onTap: () {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          PayScreen(
-                                                              data: value
-                                                                  .dataCustomer[
-                                                                      index]
-                                                                  .id!),
+                                                    TransitionScreen(
+                                                      beginLeft: 0.0,
+                                                      beginRight: 1.0,
+                                                      curvesAction:
+                                                          Curves.easeIn,
+                                                      screen: PayScreen(
+                                                          data: value
+                                                              .dataCustomer[
+                                                                  index]
+                                                              .id!),
                                                     ),
                                                   );
                                                 },
@@ -287,6 +303,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   value.deleteCustomer(value
                                                       .dataCustomer[index]);
                                                   Navigator.pop(context);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          'Berhasil Menghapus'),
+                                                    ),
+                                                  );
                                                 },
                                               ),
                                             ],
@@ -307,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Column(
                                 children: [
                                   Text(
-                                    'Sisa Hutang',
+                                    'Hutang',
                                     style: GoogleFonts.roboto(
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -318,12 +341,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 40,
                                       color: colorCustom.greenPrimary,
                                       child: Center(
-                                        child: value.dataCustomer[index]
-                                                    .remindDebt !=
-                                                null
-                                            ? Text(
-                                                'Rp :${value.dataCustomer[index].remindDebt}')
-                                            :  Text('Rp :${value.dataCustomer[index].totalPrice}'),
+                                        child: Text(
+                                            'Rp :${value.dataCustomer[index].totalPrice}'),
                                       ),
                                     ),
                                   ),
@@ -344,8 +363,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const EntryScreen()));
+          Navigator.push(
+            context,
+            TransitionScreen(
+              beginLeft: 0.0,
+              beginRight: 1.0,
+              curvesAction: Curves.easeIn,
+              screen: const EntryScreen(),
+            ),
+          );
         },
         child: const Icon(Icons.add),
       ),

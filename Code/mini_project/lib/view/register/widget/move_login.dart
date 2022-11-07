@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project/utils/utils.dart';
 
 import '../../login/login_screen.dart';
 
@@ -25,11 +26,13 @@ class MoveLogin extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-              );
+                  context,
+                  TransitionScreen(
+                    beginLeft: -1.0,
+                    beginRight: 0.0,
+                    curvesAction: Curves.easeInBack,
+                    screen: const LoginScreen(),
+                  ));
             },
             child: Text(
               'Masuk',

@@ -30,8 +30,11 @@ class _ProfileStoreScreenState extends State<ProfileStoreScreen> {
                   .clear();
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                TransitionScreen(
+                  beginLeft: 0.0,
+                  beginRight: 1.0,
+                  curvesAction: Curves.easeInBack,
+                  screen: const HomeScreen(),
                 ),
               );
             },
@@ -135,10 +138,14 @@ class _ProfileStoreScreenState extends State<ProfileStoreScreen> {
                         backgroundColor: customColor.greenPrimary),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EditProfileScreen(),
-                          ));
+                        context,
+                        TransitionScreen(
+                          beginLeft: 1.0,
+                          beginRight: 0.0,
+                          curvesAction: Curves.easeIn,
+                          screen: const EditProfileScreen(),
+                        ),
+                      );
                     },
                     child: const Text('Edit Profile'),
                   ),
@@ -150,7 +157,9 @@ class _ProfileStoreScreenState extends State<ProfileStoreScreen> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.shade900),
                     onPressed: () {
-                      final custViewModel = Provider.of<CustomerViewModel>(context,listen: false);
+                      final custViewModel = Provider.of<CustomerViewModel>(
+                          context,
+                          listen: false);
                       custViewModel.dataCustomer.clear();
                       final authViewModel =
                           Provider.of<AuthViewModel>(context, listen: false);

@@ -372,10 +372,14 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
 
                               value.updateCustomer(cust);
                               Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const HomeScreen(),
-                                  ));
+                                context,
+                                TransitionScreen(
+                                  beginLeft: 0.0,
+                                  beginRight: 0.0,
+                                  curvesAction: Curves.easeIn,
+                                  screen: const HomeScreen(),
+                                ),
+                              );
                             }
                           }
                         },

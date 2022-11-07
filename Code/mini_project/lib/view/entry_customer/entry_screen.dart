@@ -341,7 +341,8 @@ class _EntryScreenState extends State<EntryScreen> {
                                   name: _nameController.text,
                                   email: _emailController.text,
                                   createAt: dateTime,
-                                  numberPhone: '62${_numberPhoneController.text}',
+                                  numberPhone:
+                                      '62${_numberPhoneController.text}',
                                   address: _addressController.text,
                                   itemProduct: _itemHutangController.text,
                                   totalPrice: _totalHargaController.text,
@@ -351,8 +352,11 @@ class _EntryScreenState extends State<EntryScreen> {
                                 value.dataCustomer.clear();
                                 Navigator.pushReplacement(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomeScreen(),
+                                    TransitionScreen(
+                                      beginLeft: 0.0,
+                                      beginRight: 0.0,
+                                      curvesAction: Curves.ease,
+                                      screen: const HomeScreen(),
                                     ));
                               }
                             }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project/utils/utils.dart';
 import 'package:mini_project/view/home/home_screen.dart';
 import 'package:mini_project/view/login/widget/form_card.dart';
 import 'package:mini_project/view/login/widget/header_component.dart';
@@ -73,8 +74,11 @@ class _LoginScreenState extends State<LoginScreen> {
           if (mounted) {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                TransitionScreen(
+                  beginLeft: 0.0,
+                  beginRight: 1.0,
+                  curvesAction: Curves.easeIn,
+                  screen: const HomeScreen(),
                 ),
                 (route) => false);
           }

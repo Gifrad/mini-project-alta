@@ -301,8 +301,11 @@ class _PayScreenState extends State<PayScreen> {
                           value.dataCustomer.clear();
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
+                            TransitionScreen(
+                              beginLeft: 0.0,
+                              beginRight: 0.0,
+                              curvesAction: Curves.easeIn,
+                              screen: const HomeScreen(),
                             ),
                           );
                         }

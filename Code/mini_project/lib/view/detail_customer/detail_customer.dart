@@ -21,7 +21,6 @@ class DetailCustomer extends StatelessWidget {
     final colorCustom = ColorCustom();
     final currentData =
         Provider.of<CustomerViewModel>(context, listen: false).selectById(data);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorCustom.greenPrimary,
@@ -155,14 +154,16 @@ class DetailCustomer extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ImageComponent(size: size, currentData: currentData),
-          BodyFirst(currentData: currentData),
-          SecondBody(size: size, currentData: currentData),
-          ButtonComponent(colorCustom: colorCustom, currentData: currentData)
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ImageComponent(size: size, currentData: currentData),
+            BodyFirst(currentData: currentData),
+            SecondBody(size: size, currentData: currentData),
+            ButtonComponent(colorCustom: colorCustom, currentData: currentData)
+          ],
+        ),
       ),
     );
   }

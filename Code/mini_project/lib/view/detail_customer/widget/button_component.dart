@@ -23,8 +23,8 @@ class ButtonComponent extends StatelessWidget {
           children: [
             Text(
               'Jumlah',
-              style: GoogleFonts.roboto(
-                  fontSize: 14, fontWeight: FontWeight.bold),
+              style:
+                  GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -43,8 +43,8 @@ class ButtonComponent extends StatelessWidget {
           children: [
             Text(
               'Dibayar',
-              style: GoogleFonts.roboto(
-                  fontSize: 14, fontWeight: FontWeight.bold),
+              style:
+                  GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -65,8 +65,8 @@ class ButtonComponent extends StatelessWidget {
           children: [
             Text(
               'Sisa',
-              style: GoogleFonts.roboto(
-                  fontSize: 14, fontWeight: FontWeight.bold),
+              style:
+                  GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),

@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:mini_project/models/customer.dart';
 import 'package:mini_project/services/customer_service.dart';
 
-
 class CustomerViewModel extends ChangeNotifier {
   List<CustomerModel> _dataCustomer = [];
   List<CustomerModel> get dataCustomer => _dataCustomer;
@@ -70,7 +69,6 @@ class CustomerViewModel extends ChangeNotifier {
       rethrow;
     }
   }
-
 
   Future<void> deleteCustomer(CustomerModel cust) async {
     try {

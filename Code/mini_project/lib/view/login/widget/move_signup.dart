@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project/utils/utils.dart';
+import 'package:mini_project/view/home/home_screen.dart';
 
 import '../../register/register_screen.dart';
 
@@ -24,20 +26,13 @@ class SignUp extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return const RegisterScreen();
-                  },
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    final tween =
-                        Tween(begin: const Offset(1.5, 0), end: Offset.zero);
-                    return SlideTransition(
-                      position: animation.drive(tween),
-                      child: child,
-                    );
-                  },
+              Navigator.push(
+                context,
+                TransitionScreen(
+                  beginLeft: 1.0,
+                  beginRight: 0.0,
+                  curvesAction: Curves.easeIn,
+                  screen: const RegisterScreen(),
                 ),
               );
             },
