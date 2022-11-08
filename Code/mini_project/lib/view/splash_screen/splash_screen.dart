@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:mini_project/utils/utils.dart';
 import '../login/login_screen.dart';
 
 class SplahScreen extends StatefulWidget {
@@ -32,6 +33,7 @@ class _SplahScreenState extends State<SplahScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final customColor = ColorCustom();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -39,8 +41,14 @@ class _SplahScreenState extends State<SplahScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/logo.png'),
-            const CircularProgressIndicator(),
+            SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: Image.asset('assets/logo3.png')),
+            CircularProgressIndicator(
+              backgroundColor: customColor.bluePrimary,
+              color: customColor.greenPrimary,
+            ),
           ],
         ),
       )),

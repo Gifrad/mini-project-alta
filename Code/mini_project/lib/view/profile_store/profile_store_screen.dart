@@ -9,6 +9,8 @@ import 'package:mini_project/view_model/customer.dart';
 import 'package:mini_project/view_model/profile_store.dart';
 import 'package:provider/provider.dart';
 
+import 'image_full_screen.dart';
+
 class ProfileStoreScreen extends StatefulWidget {
   const ProfileStoreScreen({super.key});
 
@@ -54,19 +56,31 @@ class _ProfileStoreScreenState extends State<ProfileStoreScreen> {
                 builder: (context, snapshot) {
                   Map<String, dynamic>? data =
                       snapshot.data?.data() as Map<String, dynamic>?;
-                  return Container(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 4, color: Colors.black),
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        scale: 1.0,
-                        image: data?['imageUrl'] != null
-                            ? NetworkImage("${data?['imageUrl']}")
-                            : const NetworkImage(
-                                'https://static.vecteezy.com/system/resources/previews/004/511/733/original/camera-icon-on-white-background-vector.jpg'),
-                        fit: BoxFit.cover,
+                  return GestureDetector(
+                    onTap: () {
+                       Navigator.push(
+                          context,
+                          TransitionScreen(
+                            beginLeft: 0.0,
+                            beginRight: 0.0,
+                            curvesAction: Curves.ease,
+                            screen: ImageFull(data: data?['imageUrl'],),
+                          ));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 3,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 4, color: Colors.black),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          scale: 1.0,
+                          image: data?['imageUrl'] != null
+                              ? NetworkImage("${data?['imageUrl']}")
+                              : const NetworkImage(
+                                  'https://static.vecteezy.com/system/resources/previews/004/511/733/original/camera-icon-on-white-background-vector.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   );
