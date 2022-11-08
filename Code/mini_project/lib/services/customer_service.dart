@@ -49,7 +49,7 @@ class CustomerService {
         data: cust.toMap(),
       );
       return 'Data Berhasil Ditambahkan';
-    } on DioError catch (e) {
+    } on DioError {
       return 'Gagal menambah data';
     }
   }
@@ -86,7 +86,7 @@ class CustomerService {
 
   Future<String> deleteCustomer(CustomerModel cust) async {
     try {
-      final response = await _dio.delete(
+      await _dio.delete(
         'https://mini-project-7442c-default-rtdb.asia-southeast1.firebasedatabase.app/customer/${cust.id}.json',
       );
       return 'Menghapus ${cust.name}';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project/utils/utils.dart';
-import 'package:mini_project/view/home/home_screen.dart';
 
 import '../../register/register_screen.dart';
 
