@@ -11,10 +11,11 @@ class CustomerViewModel extends ChangeNotifier {
 
   final CustomerService _service = CustomerService();
 
-  Future<void> addCustomer(CustomerModel cust) async {
+  Future<String> addCustomer(CustomerModel cust) async {
     try {
-      await _service.addCustomer(cust);
+      final result = await _service.addCustomer(cust);
       notifyListeners();
+      return result;
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message.toString());
@@ -36,15 +37,16 @@ class CustomerViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> updateCustomer(CustomerModel cust) async {
+  Future<String> updateCustomer(CustomerModel cust) async {
     try {
-      await _service.updateCustomer(cust);
+      final result = await _service.updateCustomer(cust);
       _dataCustomer.indexWhere(
         (element) {
           return element.id == cust.id;
         },
       );
       notifyListeners();
+      return result;
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message.toString());
@@ -53,15 +55,16 @@ class CustomerViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> updatePayCustomer(CustomerModel cust) async {
+  Future<String> updatePayCustomer(CustomerModel cust) async {
     try {
-      await _service.updatePayCustomer(cust);
+      final result = await _service.updatePayCustomer(cust);
       _dataCustomer.indexWhere(
         (element) {
           return element.id == cust.id;
         },
       );
       notifyListeners();
+      return result;
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message.toString());
@@ -70,15 +73,16 @@ class CustomerViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> deleteCustomer(CustomerModel cust) async {
+  Future<String> deleteCustomer(CustomerModel cust) async {
     try {
-      await _service.deleteCustomer(cust);
+      final result = await _service.deleteCustomer(cust);
       _dataCustomer.removeWhere(
         (element) {
           return element.id == cust.id;
         },
       );
       notifyListeners();
+      return result;
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message.toString());

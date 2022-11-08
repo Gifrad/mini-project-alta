@@ -286,7 +286,7 @@ class _PayScreenState extends State<PayScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
 
@@ -297,8 +297,9 @@ class _PayScreenState extends State<PayScreen> {
                             remindDebt: _remindDebtController.text,
                           );
 
-                          value.updatePayCustomer(cust);
+                        final result = await value.updatePayCustomer(cust);
                           value.dataCustomer.clear();
+                          if(mounted){}
                           Navigator.pushReplacement(
                             context,
                             TransitionScreen(
@@ -308,6 +309,7 @@ class _PayScreenState extends State<PayScreen> {
                               screen: const HomeScreen(),
                             ),
                           );
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.toString())));
                         }
                       },
                       child: const Text('Bayar'),

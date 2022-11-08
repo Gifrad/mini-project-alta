@@ -46,7 +46,6 @@ dependencies:
   image_picker: ^0.8.6
   firebase_storage: ^11.0.3
   url_launcher: ^6.1.6
-  flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
   email_validator: ^2.1.17
   
@@ -54,7 +53,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  test: ^1.21.4
+  mockito: ^5.3.2
+  build_runner: ^2.3.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

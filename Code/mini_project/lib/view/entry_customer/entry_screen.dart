@@ -319,7 +319,7 @@ class _EntryScreenState extends State<EntryScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             final uId = const Uuid().v1();
                             final dateTime = DateFormat('yyyy-MM-dd – kk:mm')
                                 .format(DateTime.now())
@@ -348,16 +348,26 @@ class _EntryScreenState extends State<EntryScreen> {
                                   totalPrice: _totalHargaController.text,
                                 );
 
-                                value.addCustomer(cust);
+                                final result = await value.addCustomer(cust);
                                 value.dataCustomer.clear();
+                                if (mounted) {}
                                 Navigator.pushReplacement(
-                                    context,
-                                    TransitionScreen(
-                                      beginLeft: 0.0,
-                                      beginRight: 0.0,
-                                      curvesAction: Curves.ease,
-                                      screen: const HomeScreen(),
-                                    ));
+                                  context,
+                                  TransitionScreen(
+                                    beginLeft: 0.0,
+                                    beginRight: 0.0,
+                                    curvesAction: Curves.ease,
+                                    screen: const HomeScreen(),
+                                  ),
+                                );
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      result.toString(),
+                                    ),
+                                  ),
+                                );
                               }
                             }
                           },

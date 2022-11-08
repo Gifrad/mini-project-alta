@@ -19,19 +19,18 @@ class CustomerService {
       if (response.data != null) {
         response.data.forEach((id, value) {
           customer.add(CustomerModel(
-            id: id,
-            image: value['image'],
-            name: value['name'],
-            createAt: value['createAt'],
-            email: value['email'],
-            numberPhone: value['numberPhone'],
-            address: value['address'],
-            itemProduct: value['itemProduct'],
-            totalPrice: value['totalPrice'],
-            itemPayNow: value['itemPayNow'],
-            payNow: value['payNow'],
-            remindDebt: value['remindDebt']
-          ));
+              id: id,
+              image: value['image'],
+              name: value['name'],
+              createAt: value['createAt'],
+              email: value['email'],
+              numberPhone: value['numberPhone'],
+              address: value['address'],
+              itemProduct: value['itemProduct'],
+              totalPrice: value['totalPrice'],
+              itemPayNow: value['itemPayNow'],
+              payNow: value['payNow'],
+              remindDebt: value['remindDebt']));
         });
       }
       return customer;
@@ -43,57 +42,59 @@ class CustomerService {
     }
   }
 
-  Future<void> addCustomer(CustomerModel cust) async {
+  Future<String> addCustomer(CustomerModel cust) async {
     try {
       await _dio.post(
         baseUrl,
         data: cust.toMap(),
       );
+      return 'Data Berhasil Ditambahkan';
     } on DioError catch (e) {
-      if (kDebugMode) {
-        print(e.message);
-      }
-      rethrow;
+      return 'Gagal menambah data';
     }
   }
 
-  Future<void> updateCustomer(CustomerModel cust) async {
+  Future<String> updateCustomer(CustomerModel cust) async {
     try {
       await _dio.patch(
         'https://mini-project-7442c-default-rtdb.asia-southeast1.firebasedatabase.app/customer/${cust.id}.json',
         data: cust.toMap(),
       );
+      return 'Berhasil Update Data';
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message);
       }
-      rethrow;
+      return 'Gagal Update Data';
     }
   }
 
-  Future<void> updatePayCustomer(CustomerModel cust) async {
+  Future<String> updatePayCustomer(CustomerModel cust) async {
     try {
       await _dio.patch(
         'https://mini-project-7442c-default-rtdb.asia-southeast1.firebasedatabase.app/customer/${cust.id}.json',
         data: cust.toMapPay(),
       );
+      return 'Pembayaran Berhasil';
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message);
       }
-      rethrow;
+      return 'Pembayaran Gagal';
     }
   }
 
-  Future<void> deleteCustomer(CustomerModel cust) async {
+  Future<String> deleteCustomer(CustomerModel cust) async {
     try {
-      await _dio.delete(
-          'https://mini-project-7442c-default-rtdb.asia-southeast1.firebasedatabase.app/customer/${cust.id}.json');
+      final response = await _dio.delete(
+        'https://mini-project-7442c-default-rtdb.asia-southeast1.firebasedatabase.app/customer/${cust.id}.json',
+      );
+      return 'Menghapus ${cust.name}';
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e.message);
       }
-      rethrow;
+      return 'Gagal Menghapus';
     }
   }
 }

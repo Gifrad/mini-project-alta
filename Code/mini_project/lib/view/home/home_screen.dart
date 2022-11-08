@@ -299,15 +299,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 leading:
                                                     const Icon(Icons.delete),
                                                 title: const Text('Hapus'),
-                                                onTap: () {
-                                                  value.deleteCustomer(value
-                                                      .dataCustomer[index]);
+                                                onTap: () async {
+                                                  final result = await value
+                                                      .deleteCustomer(value
+                                                          .dataCustomer[index]);
+                                                  if (mounted) {}
                                                   Navigator.pop(context);
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
-                                                    const SnackBar(
+                                                    SnackBar(
                                                       content: Text(
-                                                          'Berhasil Menghapus'),
+                                                          result.toString()),
                                                     ),
                                                   );
                                                 },

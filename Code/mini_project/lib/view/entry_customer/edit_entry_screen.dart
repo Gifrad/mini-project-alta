@@ -339,7 +339,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                     builder: (context, value, child) => SizedBox(
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           final idCustomer = Provider.of<CustomerViewModel>(
                                   context,
                                   listen: false)
@@ -370,7 +370,8 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                 totalPrice: _totalHargaController.text,
                               );
 
-                              value.updateCustomer(cust);
+                              final result = await value.updateCustomer(cust);
+                              if(mounted){}
                               Navigator.pushReplacement(
                                 context,
                                 TransitionScreen(
@@ -380,6 +381,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                   screen: const HomeScreen(),
                                 ),
                               );
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.toString())));
                             }
                           }
                         },
