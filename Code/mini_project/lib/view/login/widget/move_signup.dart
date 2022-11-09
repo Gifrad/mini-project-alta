@@ -25,7 +25,7 @@ class SignUp extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 TransitionScreen(
                   beginLeft: 1.0,

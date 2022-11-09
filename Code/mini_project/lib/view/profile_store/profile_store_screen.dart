@@ -178,7 +178,7 @@ class _ProfileStoreScreenState extends State<ProfileStoreScreen> {
                       final authViewModel =
                           Provider.of<AuthViewModel>(context, listen: false);
                       authViewModel.logout().then(
-                            (value) => Navigator.push(
+                            (value) => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const LoginScreen(),
