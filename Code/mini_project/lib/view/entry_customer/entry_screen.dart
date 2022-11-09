@@ -90,7 +90,7 @@ class _EntryScreenState extends State<EntryScreen> {
                                 ? NetworkImage("${data?['imageUrl']}")
                                 : const NetworkImage(
                                     'https://static.vecteezy.com/system/resources/previews/004/511/733/original/camera-icon-on-white-background-vector.jpg'),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       );
@@ -184,6 +184,7 @@ class _EntryScreenState extends State<EntryScreen> {
                             height: 6,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: _numberPhoneController,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.phone),
@@ -288,6 +289,7 @@ class _EntryScreenState extends State<EntryScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
                                   child: TextFormField(
+                                    keyboardType: TextInputType.number,
                                     controller: _totalHargaController,
                                     decoration: InputDecoration(
                                       prefix: const Text('Rp.'),
@@ -341,8 +343,7 @@ class _EntryScreenState extends State<EntryScreen> {
                                   name: _nameController.text,
                                   email: _emailController.text,
                                   createAt: dateTime,
-                                  numberPhone:
-                                      _numberPhoneController.text,
+                                  numberPhone: _numberPhoneController.text,
                                   address: _addressController.text,
                                   itemProduct: _itemHutangController.text,
                                   totalPrice: _totalHargaController.text,

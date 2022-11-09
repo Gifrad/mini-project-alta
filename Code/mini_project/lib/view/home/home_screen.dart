@@ -32,12 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dataCustomer = Provider.of<CustomerViewModel>(context).dataCustomer;
-    final dataCustomerLenght = dataCustomer.length;
-    final sumPrice = dataCustomer.fold(
-        0,
-        ((sum, element) =>
-            sum + num.parse(element.totalPrice.toString()).toInt()));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(180),
@@ -89,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ? NetworkImage("${data?['imageUrl']}")
                                       : const NetworkImage(
                                           'https://akornas.ac.id/wp-content/uploads/2021/12/placeholder.png'),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             );
@@ -141,16 +135,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: GoogleFonts.roboto(
                                     fontWeight: FontWeight.bold),
                               ),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Container(
-                                  width: 100,
-                                  height: 40,
-                                  color: colorCustom.greenPrimary,
-                                  child: Center(
-                                    child: Text(dataCustomerLenght.toString()),
-                                  ),
-                                ),
+                              Consumer<CustomerViewModel>(
+                                builder: (context, value, child) {
+                                  final dataLength = value.dataCustomer.length;
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Container(
+                                      width: 100,
+                                      height: 40,
+                                      color: colorCustom.greenPrimary,
+                                      child: Center(
+                                        child: Text("$dataLength"),
+                                      ),
+                                    ),
+                                  );
+                                },
                               )
                             ],
                           ),
@@ -160,17 +159,27 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: GoogleFonts.roboto(
                                   fontWeight: FontWeight.bold),
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: 100,
-                                height: 40,
-                                color: colorCustom.bluePrimary,
-                                child: Center(
-                                    child: sumPrice != 0
-                                        ? Text('Rp :$sumPrice')
-                                        : const Text('0')),
-                              ),
+                            Consumer<CustomerViewModel>(
+                              builder: (context, value, child) {
+                                final sumPrice = value.dataCustomer.fold(
+                                    0,
+                                    ((sum, element) =>
+                                        sum +
+                                        num.parse(element.totalPrice.toString())
+                                            .toInt()));
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Container(
+                                    width: 100,
+                                    height: 40,
+                                    color: colorCustom.bluePrimary,
+                                    child: Center(
+                                        child: sumPrice != 0
+                                            ? Text('Rp :$sumPrice')
+                                            : const Text('0')),
+                                  ),
+                                );
+                              },
                             ),
                           ])
                         ],

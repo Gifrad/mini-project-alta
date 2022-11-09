@@ -8,7 +8,6 @@ import '../../view_model/customer.dart';
 import '../home/home_screen.dart';
 
 class PayScreen extends StatefulWidget {
-  
   final dynamic data;
   const PayScreen({super.key, this.data});
 
@@ -230,6 +229,7 @@ class _PayScreenState extends State<PayScreen> {
                         width: size.width * 0.4,
                         height: size.height * 0.06,
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: _payNowController,
                           decoration: InputDecoration(
                             prefix: const Text('Rp.'),
@@ -258,6 +258,7 @@ class _PayScreenState extends State<PayScreen> {
                         width: size.width * 0.4,
                         height: size.height * 0.06,
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: _remindDebtController,
                           decoration: InputDecoration(
                             prefix: const Text('Rp.'),
@@ -297,9 +298,9 @@ class _PayScreenState extends State<PayScreen> {
                             remindDebt: _remindDebtController.text,
                           );
 
-                        final result = await value.updatePayCustomer(cust);
+                          final result = await value.updatePayCustomer(cust);
                           value.dataCustomer.clear();
-                          if(mounted){}
+                          if (mounted) {}
                           Navigator.pushReplacement(
                             context,
                             TransitionScreen(
@@ -309,7 +310,8 @@ class _PayScreenState extends State<PayScreen> {
                               screen: const HomeScreen(),
                             ),
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.toString())));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(result.toString())));
                         }
                       },
                       child: const Text('Bayar'),

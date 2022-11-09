@@ -98,7 +98,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                 ? NetworkImage("${data?['imageUrl']}")
                                 : const NetworkImage(
                                     'https://static.vecteezy.com/system/resources/previews/004/511/733/original/camera-icon-on-white-background-vector.jpg'),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       );
@@ -203,6 +203,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                             height: 6,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: _numberPhoneController,
                             decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.phone),
@@ -310,6 +311,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
                                   child: TextFormField(
+                                    keyboardType: TextInputType.number,
                                     controller: _totalHargaController,
                                     decoration: InputDecoration(
                                       prefix: const Text('Rp.'),
@@ -371,7 +373,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                               );
 
                               final result = await value.updateCustomer(cust);
-                              if(mounted){}
+                              if (mounted) {}
                               Navigator.pushReplacement(
                                 context,
                                 TransitionScreen(
@@ -381,7 +383,8 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                   screen: const HomeScreen(),
                                 ),
                               );
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.toString())));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(result.toString())));
                             }
                           }
                         },
