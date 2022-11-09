@@ -342,7 +342,7 @@ class _EntryScreenState extends State<EntryScreen> {
                                   email: _emailController.text,
                                   createAt: dateTime,
                                   numberPhone:
-                                      '62${_numberPhoneController.text}',
+                                      _numberPhoneController.text,
                                   address: _addressController.text,
                                   itemProduct: _itemHutangController.text,
                                   totalPrice: _totalHargaController.text,

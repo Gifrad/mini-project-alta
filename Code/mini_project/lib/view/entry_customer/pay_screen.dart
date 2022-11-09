@@ -8,8 +8,8 @@ import '../../view_model/customer.dart';
 import '../home/home_screen.dart';
 
 class PayScreen extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  final data;
+  
+  final dynamic data;
   const PayScreen({super.key, this.data});
 
   @override

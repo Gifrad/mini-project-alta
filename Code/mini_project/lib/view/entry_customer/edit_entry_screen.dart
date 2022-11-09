@@ -364,7 +364,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                 name: _nameController.text,
                                 email: _emailController.text,
                                 createAt: dateTime,
-                                numberPhone: '62${_numberPhoneController.text}',
+                                numberPhone: _numberPhoneController.text,
                                 address: _addressController.text,
                                 itemProduct: _itemHutangController.text,
                                 totalPrice: _totalHargaController.text,

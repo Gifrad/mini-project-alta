@@ -105,7 +105,7 @@ class AuthViewModel extends ChangeNotifier {
           print('The account already exists for that email.');
         }
         changeState(ViewState.none);
-        return message = 'Email telah terdaftar';
+        return message = 'Gagal , Email telah terdaftar';
       }
     } catch (e) {
       if (kDebugMode) {

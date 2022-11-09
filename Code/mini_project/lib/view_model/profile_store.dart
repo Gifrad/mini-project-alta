@@ -7,7 +7,6 @@ import 'package:mini_project/models/profile_store.dart';
 class ProfileStoreViewModel extends ChangeNotifier {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Reference refInstance = FirebaseStorage.instance.ref();
-  String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
 
   Future<void> addDataProfile(ProfileStore data) async {
     CollectionReference dataFirestore = firestore.collection('dataStore');
