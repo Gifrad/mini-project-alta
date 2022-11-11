@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -289,6 +290,10 @@ class _EntryScreenState extends State<EntryScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
                                   child: TextFormField(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      CurrencyFormat()
+                                    ],
                                     keyboardType: TextInputType.number,
                                     controller: _totalHargaController,
                                     decoration: InputDecoration(
@@ -346,7 +351,7 @@ class _EntryScreenState extends State<EntryScreen> {
                                   numberPhone: _numberPhoneController.text,
                                   address: _addressController.text,
                                   itemProduct: _itemHutangController.text,
-                                  totalPrice: _totalHargaController.text,
+                                  totalPrice: replaceFormatCurrency(_totalHargaController.text),
                                 );
 
                                 final result = await value.addCustomer(cust);

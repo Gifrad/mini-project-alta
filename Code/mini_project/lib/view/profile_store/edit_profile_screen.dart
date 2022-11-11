@@ -151,6 +151,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
+                          maxLines: 2,
                           controller: _addressStoreCntrl,
                           decoration: InputDecoration(
                               prefixIcon: const Icon(Icons.location_on),

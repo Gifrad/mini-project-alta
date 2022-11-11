@@ -33,7 +33,8 @@ class ButtonComponent extends StatelessWidget {
                 height: 40,
                 color: colorCustom.greenPrimary,
                 child: Center(
-                  child: Text('Rp.${currentData.totalPrice}'),
+                  child: Text(parseNumberCurrencyWithRp(
+                      num.parse(currentData.totalPrice!))),
                 ),
               ),
             )
@@ -54,7 +55,8 @@ class ButtonComponent extends StatelessWidget {
                 color: colorCustom.bluePrimary,
                 child: Center(
                   child: currentData.payNow != null
-                      ? Text('Rp.${currentData.payNow}')
+                      ? Text(parseNumberCurrencyWithRp(
+                      num.parse(currentData.payNow!)))
                       : const Text('Rp.0'),
                 ),
               ),
@@ -76,7 +78,8 @@ class ButtonComponent extends StatelessWidget {
                 color: Colors.red.shade200,
                 child: Center(
                   child: currentData.remindDebt != null
-                      ? Text('Rp.${currentData.remindDebt}')
+                      ? Text(parseNumberCurrencyWithRp(
+                      num.parse(currentData.remindDebt!)))
                       : const Text("Rp.0"),
                 ),
               ),

@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: colorCustom.bluePrimary,
                                     child: Center(
                                         child: sumPrice != 0
-                                            ? Text('Rp :$sumPrice')
+                                            ? Text(parseNumberCurrencyWithRp(sumPrice))
                                             : const Text('0')),
                                   ),
                                 );
@@ -348,12 +348,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: Container(
-                                      width: 100,
+                                      width: 120,
                                       height: 40,
                                       color: colorCustom.greenPrimary,
                                       child: Center(
-                                        child: Text(
-                                            'Rp :${value.dataCustomer[index].totalPrice}'),
+                                        child: Text(parseNumberCurrencyWithRp(
+                                            num.parse(value.dataCustomer[index]
+                                                .totalPrice!))),
                                       ),
                                     ),
                                   ),

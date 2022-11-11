@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -16,8 +17,7 @@ import '../../view_model/profile_store.dart';
 import '../home/home_screen.dart';
 
 class EditEntryScreen extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  final data;
+  final dynamic data;
   const EditEntryScreen({super.key, this.data});
 
   @override
@@ -42,10 +42,11 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
     final currentCustomer =
         Provider.of<CustomerViewModel>(context, listen: false)
             .selectById(widget.data);
+    final total = num.parse(currentCustomer.totalPrice!);
     _nameController.text = currentCustomer.name!;
     _itemHutangController.text = currentCustomer.itemProduct!;
     _emailController.text = currentCustomer.email!;
-    _totalHargaController.text = currentCustomer.totalPrice!;
+    _totalHargaController.text = parseNumberCurrencyWithOutRp(total);
     _numberPhoneController.text = currentCustomer.numberPhone!;
     _addressController.text = currentCustomer.address!;
     super.initState();
@@ -311,6 +312,10 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.4,
                                   child: TextFormField(
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      CurrencyFormat()
+                                    ],
                                     keyboardType: TextInputType.number,
                                     controller: _totalHargaController,
                                     decoration: InputDecoration(
@@ -369,7 +374,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
                                 numberPhone: _numberPhoneController.text,
                                 address: _addressController.text,
                                 itemProduct: _itemHutangController.text,
-                                totalPrice: _totalHargaController.text,
+                                totalPrice: replaceFormatCurrency(_totalHargaController.text),
                               );
 
                               final result = await value.updateCustomer(cust);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -37,10 +38,13 @@ class _PayScreenState extends State<PayScreen> {
       _itemPayNowController.text = currentCustomer.itemPayNow!;
     }
     if (payNow != null) {
-      _payNowController.text = currentCustomer.payNow!;
+      final totalPay = num.parse(currentCustomer.payNow!);
+      _payNowController.text = parseNumberCurrencyWithOutRp(totalPay);
     }
     if (remindDebt != null) {
-      _remindDebtController.text = currentCustomer.remindDebt!;
+      final totalRemindDebt = num.parse(currentCustomer.remindDebt!);
+      _remindDebtController.text =
+          parseNumberCurrencyWithOutRp(totalRemindDebt);
     }
     super.initState();
   }
@@ -121,7 +125,7 @@ class _PayScreenState extends State<PayScreen> {
               ),
               SizedBox(
                 width: size.width * 0.9,
-                height: size.height * 0.090,
+                height: size.height * 0.15,
                 child: Card(
                   color: colorCostom.bluePrimary,
                   child: Padding(
@@ -196,6 +200,7 @@ class _PayScreenState extends State<PayScreen> {
                 width: size.width * 0.9,
                 child: Card(
                   child: TextFormField(
+                    maxLines: 3,
                     controller: _itemPayNowController,
                     decoration: InputDecoration(
                       hintText: 'Item',
@@ -227,8 +232,12 @@ class _PayScreenState extends State<PayScreen> {
                       ),
                       SizedBox(
                         width: size.width * 0.4,
-                        height: size.height * 0.06,
+                        height: size.height * 0.08,
                         child: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CurrencyFormat()
+                          ],
                           keyboardType: TextInputType.number,
                           controller: _payNowController,
                           decoration: InputDecoration(
@@ -256,8 +265,12 @@ class _PayScreenState extends State<PayScreen> {
                       ),
                       SizedBox(
                         width: size.width * 0.4,
-                        height: size.height * 0.06,
+                        height: size.height * 0.08,
                         child: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CurrencyFormat()
+                          ],
                           keyboardType: TextInputType.number,
                           controller: _remindDebtController,
                           decoration: InputDecoration(
@@ -293,9 +306,11 @@ class _PayScreenState extends State<PayScreen> {
 
                           CustomerModel cust = CustomerModel(
                             id: currentCustomer.id,
-                            payNow: _payNowController.text,
                             itemPayNow: _itemPayNowController.text,
-                            remindDebt: _remindDebtController.text,
+                            payNow:
+                                replaceFormatCurrency(_payNowController.text),
+                            remindDebt: replaceFormatCurrency(
+                                _remindDebtController.text),
                           );
 
                           final result = await value.updatePayCustomer(cust);
