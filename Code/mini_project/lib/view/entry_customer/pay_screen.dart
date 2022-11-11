@@ -165,7 +165,7 @@ class _PayScreenState extends State<PayScreen> {
                           padding: const EdgeInsets.all(4.0),
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text('Rp.${currentCustomer.totalPrice}'),
+                            child: Text(parseNumberCurrencyWithRp(num.parse(currentCustomer.totalPrice!))),
                           ),
                         ),
                       ),
