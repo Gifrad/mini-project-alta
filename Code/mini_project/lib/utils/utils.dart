@@ -83,7 +83,7 @@ String parseNumberCurrencyWithOutRp(num number){
 
 String parseNumberCurrencyWithRp(num number){
   final String result;
-  result = NumberFormat.currency(symbol: 'Rp.',decimalDigits: 0).format(number);
+  result = NumberFormat.currency(symbol: 'Rp.',decimalDigits: 0).format(number).replaceAll(',', '.');
   return result;
 }
 

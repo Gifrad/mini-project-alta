@@ -46,7 +46,7 @@ class _EditEntryScreenState extends State<EditEntryScreen> {
     _nameController.text = currentCustomer.name!;
     _itemHutangController.text = currentCustomer.itemProduct!;
     _emailController.text = currentCustomer.email!;
-    _totalHargaController.text = parseNumberCurrencyWithOutRp(total);
+    _totalHargaController.text = parseNumberCurrencyWithOutRp(total).replaceAll(',', '.');
     _numberPhoneController.text = currentCustomer.numberPhone!;
     _addressController.text = currentCustomer.address!;
     super.initState();
