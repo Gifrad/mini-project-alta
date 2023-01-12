@@ -28,6 +28,9 @@ class CustomerViewModel extends ChangeNotifier {
     try {
       final result = await _service.getCustomer();
       _dataCustomer = result;
+      _dataCustomer.sort(
+        (a, b) => a.name!.toLowerCase().compareTo(b.name!.toLowerCase()),
+      );
       notifyListeners();
     } on DioError catch (e) {
       if (kDebugMode) {
